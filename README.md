@@ -1,4 +1,4 @@
-# Backend — Offline Nepali & Sinhala Literature Translator
+ Backend — Offline Nepali & Sinhala Literature Translator
 
 **Project:** Offline Literature Translator (Backend)  
 **Authors:** Sahas + Team  
@@ -583,6 +583,8 @@ python test_sinhala.py
 
 ---
 
-**Note**: This backend provides intelligent, culturally-aware translations that preserve meaning and context across Nepali, Sinhala, and English languages with dynamic content analysis.#   B h a s h a S e t u  
- #   B h a s h a S e t u  
+**Note**: This backend provides intelligent, culturally-aware translations that preserve meaning and context across Nepali, Sinhala, and English languages with dynamic content analysis.#   B h a s h a S e t u 
+ 
+ #   B h a s h a S e t u 
+ 
  
