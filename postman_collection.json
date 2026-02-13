@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "nepali-sinhala-translator-backend",
+		"name": "Nepali & Sinhala Literature Translator Backend",
+		"description": "Complete API collection for testing the offline literature translator backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "Health Check Endpoints",
+			"item": [
+				{
+					"name": "Basic Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Basic health check to verify backend is running"
+					},
+					"response": []
+				},
+				{
+					"name": "Version Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/version",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"version"
+							]
+						},
+						"description": "Get application version and framework information"
+					},
+					"response": []
+				},
+				{
+					"name": "Models Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/models/status",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"models",
+								"status"
+							]
+						},
+						"description": "Check status of all ML models (OCR, Translation, Language Detection, LLM)"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for system health monitoring and status checks"
+		},
+		{
+			"name": "Translation Endpoints",
+			"item": [
+				{
+					"name": "Direct Text Translation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"नमस्ते, तपाईंलाई कस्तो छ?\",\n  \"source_lang\": \"auto\",\n  \"target_lang\": \"en\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/translate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"translate"
+							]
+						},
+						"description": "Translate text directly without file upload. Supports auto-detection of source language."
+					},
+					"response": []
+				},
+				{
+					"name": "Nepali to English Translation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"साहित्यमा भाषाको महत्व अत्यधिक छ। यसले मानिसहरूको भावना र विचारलाई प्रकट गर्छ।\",\n  \"source_lang\": \"nepali\",\n  \"target_lang\": \"english\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/translate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"translate"
+							]
+						},
+						"description": "Translate Nepali literature text to English"
+					},
+					"response": []
+				},
+				{
+					"name": "Sinhala to English Translation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"සාහිත්‍යය යනු මානව සභ්‍යතාවේ දර්පණයකි. එය අපගේ සංස්කෘතිය සහ සම්ප්‍රदායන් පිළිබිඹු කරයි.\",\n  \"source_lang\": \"sinhala\",\n  \"target_lang\": \"english\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/translate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"translate"
+							]
+						},
+						"description": "Translate Sinhala literature text to English"
+					},
+					"response": []
+				},
+				{
+					"name": "Language Detection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"यो नेपाली भाषामा लेखिएको पाठ हो।\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/detect-language",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"detect-language"
+							]
+						},
+						"description": "Automatically detect the language of provided text"
+					},
+					"response": []
+				},
+				{
+					"name": "Text Summarization",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Literature is the mirror of human civilization. It reflects our culture, traditions, emotions, and thoughts. Through literature, we can understand the social, political, and economic conditions of different eras. Great literary works transcend time and continue to inspire generations. They provide insights into human nature and help us understand ourselves better. Literature also serves as a bridge between different cultures and languages, promoting understanding and empathy among people from diverse backgrounds.\",\n  \"max_length\": 100\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/summarize",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"summarize"
+							]
+						},
+						"description": "Generate a summary of the provided text with specified maximum length"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for direct text translation, language detection, and summarization"
+		},
+		{
+			"name": "Document Processing Endpoints",
+			"item": [
+				{
+					"name": "Upload Document",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/path/to/your/document.pdf",
+									"description": "Upload a PDF, PNG, JPG, JPEG, TIFF, or BMP file for processing"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"upload"
+							]
+						},
+						"description": "Upload a document (PDF or image) for OCR and translation processing. Returns a job_id for tracking."
+					},
+					"response": []
+				},
+				{
+					"name": "Check Job Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/status/{{job_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"status",
+								"{{job_id}}"
+							]
+						},
+						"description": "Check the processing status of an uploaded document using the job_id"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Processing Result",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/result/{{job_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"result",
+								"{{job_id}}"
+							]
+						},
+						"description": "Retrieve the complete processing result for a completed job"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints for document upload, processing status tracking, and result retrieval"
+		},
+		{
+			"name": "Test Data Examples",
+			"item": [
+				{
+					"name": "Test Nepali Poetry Translation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"मेरो देश नेपाल\\nहिमालको काखमा बसेको\\nसुन्दर र शान्त देश\\nयहाँका मानिसहरू मिलनसार\\nसंस्कृति र परम्परा धनी\",\n  \"source_lang\": \"nepali\",\n  \"target_lang\": \"english\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/translate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"translate"
+							]
+						},
+						"description": "Test translation of Nepali poetry"
+					},
+					"response": []
+				},
+				{
+					"name": "Test Sinhala Literature Translation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"ශ්‍රී ලංකාවේ සාහිත්‍යය\\nපුරාණ කාලයේ සිට\\nසමකාලීන යුගය දක්වා\\nවර්ධනය වී ඇත\\nබුද්ධ ධර්මයේ බලපෑම\\nගැඹුරු වශයෙන් දක්නට ලැබේ\",\n  \"source_lang\": \"sinhala\",\n  \"target_lang\": \"english\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/translate",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"translate"
+							]
+						},
+						"description": "Test translation of Sinhala literature"
+					},
+					"response": []
+				},
+				{
+					"name": "Test Mixed Language Detection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"Hello नमस्ते සුභ දවසක් වේවා!\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/detect-language",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"detect-language"
+							]
+						},
+						"description": "Test language detection with mixed languages"
+					},
+					"response": []
+				},
+				{
+					"name": "Test Long Text Summarization",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text\": \"The rich literary traditions of Nepal and Sri Lanka span centuries, encompassing diverse forms of expression from ancient religious texts to contemporary novels and poetry. Nepali literature, written primarily in the Devanagari script, has been deeply influenced by Sanskrit traditions while also incorporating local folklore and cultural elements. The works of great Nepali poets like Laxmi Prasad Devkota and Bhanubhakta Acharya have shaped the literary landscape significantly. Similarly, Sinhala literature boasts a heritage that dates back over two millennia, with early works being primarily Buddhist religious texts written on palm leaves. The influence of Buddhism is evident throughout Sinhala literary history, from the ancient Mahavamsa chronicle to modern literary works. Both traditions have evolved to address contemporary themes while maintaining their cultural roots, making them invaluable repositories of South Asian literary heritage.\",\n  \"max_length\": 150\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/summarize",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"summarize"
+							]
+						},
+						"description": "Test summarization of long literary text"
+					},
+					"response": []
+				}
+			],
+			"description": "Sample test cases with real Nepali and Sinhala text for comprehensive testing"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Set timestamp for requests",
+					"pm.globals.set(\"timestamp\", new Date().toISOString());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Basic response validation",
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});",
+					"",
+					"pm.test(\"Response time is less than 30000ms\", function () {",
+					"    pm.expect(pm.response.responseTime).to.be.below(30000);",
+					"});",
+					"",
+					"pm.test(\"Response has JSON body\", function () {",
+					"    pm.response.to.be.json;",
+					"});",
+					"",
+					"// Store job_id if present for document processing",
+					"if (pm.response.json().job_id) {",
+					"    pm.globals.set(\"job_id\", pm.response.json().job_id);",
+					"    console.log(\"Job ID stored: \" + pm.response.json().job_id);",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:5005",
+			"type": "string",
+			"description": "Base URL for the Flask backend server"
+		},
+		{
+			"key": "job_id",
+			"value": "sample-job-id",
+			"type": "string",
+			"description": "Job ID for document processing (automatically set after upload)"
+		}
+	]
+}
