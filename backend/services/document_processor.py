@@ -121,9 +121,10 @@ class DocumentProcessor:
         """Get job result if completed"""
         if job_id not in self.jobs:
             return None
-        
+
         job = self.jobs[job_id]
+
         if job['status'] != 'completed':
             return None
-        
+
         return job.get('result')

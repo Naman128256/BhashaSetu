@@ -188,8 +188,9 @@ def main():
                     
                     while True:
                         status_result = get_job_status(job_id)
+                        # st.write("DEBUG STATUS:", status_result)
                         
-                        if "error" not in status_result:
+                        if not status_result.get("error"):
                             status = status_result.get('status')
                             progress = status_result.get('progress', 0)
                             message = status_result.get('message', '')
@@ -209,7 +210,7 @@ def main():
                     with st.spinner("Retrieving results..."):
                         result = get_job_result(job_id)
                     
-                    if "error" not in result:
+                    if not result.get("error"):
                         st.success("✅ Processing completed!")
                         
                         # Display results in columns

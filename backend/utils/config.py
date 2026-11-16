@@ -19,7 +19,7 @@ class Config:
     
     # Paths
     BASE_DIR = Path(__file__).parent.parent
-    MODELS_DIR = BASE_DIR / 'models' / 'models'
+    MODELS_DIR = BASE_DIR / 'models'
     LOGS_DIR = BASE_DIR / 'logs'
     TEMP_DIR = BASE_DIR / 'temp'
     

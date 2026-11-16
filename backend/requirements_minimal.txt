@@ -1,6 +1,12 @@
 Flask==3.0.0
 Flask-CORS==4.0.0
 Werkzeug==3.0.1
-numpy
-Pillow
-requests
+numpy==1.26.4
+Pillow==10.1.0
+requests==2.31.0
+ctranslate2==4.9.0
+sentencepiece
+PyMuPDF==2.1
+google-genai==3.3.0
+python-dotenv
+pytesseract

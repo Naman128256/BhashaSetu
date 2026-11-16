@@ -12,6 +12,7 @@ import uuid
 
 upload_bp = Blueprint('upload', __name__)
 logger = get_logger(__name__)
+processor = DocumentProcessor()
 
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'tiff', 'bmp'}
 
@@ -49,7 +50,7 @@ def upload_file():
         logger.info(f"File uploaded successfully: {filename}, Job ID: {job_id}")
         
         # Initialize document processor
-        processor = DocumentProcessor()
+        # processor = DocumentProcessor()
         
         # Start processing (async)
         processor.process_document_async(job_id, str(file_path))
@@ -70,7 +71,7 @@ def get_job_status(job_id):
     logger.info(f"Status check for job: {job_id}")
     
     try:
-        processor = DocumentProcessor()
+        # processor = DocumentProcessor()
         status = processor.get_job_status(job_id)
         
         return jsonify(status)
@@ -85,7 +86,7 @@ def get_result(job_id):
     logger.info(f"Result requested for job: {job_id}")
     
     try:
-        processor = DocumentProcessor()
+        # processor = DocumentProcessor()
         result = processor.get_job_result(job_id)
         
         if result is None:

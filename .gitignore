@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.vscode/
+backend/logs/
+backend/temp/
+backend/models/nllb_model/
+bhashasetu_nepali_test.png
+bhashasetu_sinhala_test.png
+test_digital.pdf
+test_scanned.pdf
+*.zip
