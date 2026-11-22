@@ -3,6 +3,8 @@ File upload and document processing routes
 """
 
 from flask import Blueprint, request, jsonify
+from flask import send_file
+from services.pdf_generator import generate_translation_pdf
 from werkzeug.utils import secure_filename
 from services.document_processor import DocumentProcessor
 from utils.logger import get_logger
@@ -96,4 +98,42 @@ def get_result(job_id):
         
     except Exception as e:
         logger.error(f"Error getting job result: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+
+
+@upload_bp.route('/download/<job_id>', methods=['GET'])
+def download_translation_pdf(job_id):
+    """Generate and download translated text as a PDF."""
+
+    logger.info(f"PDF download requested for job: {job_id}")
+
+    try:
+        result = processor.get_job_result(job_id)
+
+        if result is None:
+            return jsonify({
+                'error': 'Job not found or not completed'
+            }), 404
+
+        translation_info = result.get('translation', {})
+        translated_text = translation_info.get('translated_text', '')
+
+        if not translated_text.strip():
+            return jsonify({
+                'error': 'No translated text available'
+            }), 404
+
+        pdf_buffer = generate_translation_pdf(translated_text)
+
+        return send_file(
+            pdf_buffer,
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name=f'BhashaSetu_Translation_{job_id[:8]}.pdf'
+        )
+
+    except Exception as e:
+        logger.error(f"Error generating translation PDF: {e}")
         return jsonify({'error': str(e)}), 500

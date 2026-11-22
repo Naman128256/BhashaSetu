@@ -236,7 +236,26 @@ def main():
                                 translated_text = translation_info.get('translated_text', 'No translation')
                                 st.text_area("Translation:", value=translated_text, height=200)
                                 st.info(f"**Confidence:** {translation_info.get('confidence', 0):.2%}")
-                        
+                                # Download translated text as PDF
+                                try:
+                                    pdf_response = requests.get(
+                                        f"{BACKEND_URL}/download/{job_id}",
+                                        timeout=30
+                                    )
+
+                                    if pdf_response.status_code == 200:
+                                        st.download_button(
+                                            label="📄 Download Translation PDF",
+                                            data=pdf_response.content,
+                                            file_name="BhashaSetu_Translation.pdf",
+                                            mime="application/pdf"
+                                        )
+                                    else:
+                                        st.error("Could not generate PDF. Please try again.")
+
+                                except requests.exceptions.RequestException as e:
+                                    st.error(f"PDF download failed: {e}")
+                                                        
                         # Summary section
                         st.subheader("📊 Processing Summary")
                         summary_info = result.get('summary', {})
